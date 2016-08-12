@@ -1,5 +1,5 @@
 Dependencies for Project 'Test', Target 'Test': (DO NOT MODIFY !)
-F (.\main.c)(0x57A33546)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x57AC581B)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x57961386)
 I (..\USER\stm32f4xx.h)(0x578DCB46)
 I (..\CORE\core_cm4.h)(0x53C7D532)
@@ -46,6 +46,8 @@ I (..\HARDWARE\iwdg.h)(0x579613AE)
 I (..\HARDWARE\infrared_adc.h)(0x57A340C6)
 I (..\HARDWARE\init.h)(0x579702BC)
 I (..\HARDWARE\move.h)(0x579DE660)
+I (..\HARDWARE\rfid.h)(0x57AC2187)
+I (D:\program\Keil\ARM\ARMCC\include\string.h)(0x5475F300)
 F (.\stm32f4xx_it.c)(0x578DC21C)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\stm32f4xx_it.o --omf_browse ..\obj\stm32f4xx_it.crf --depend ..\obj\stm32f4xx_it.d)
 I (stm32f4xx_it.h)(0x53DBB858)
 I (stm32f4xx.h)(0x578DCB46)
@@ -741,7 +743,7 @@ I (..\FWLTB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLTB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\SYSTEM\delay\delay.h)(0x57961354)
 I (..\HARDWARE\DC_Drive_Wheels.h)(0x579DE435)
-F (..\HARDWARE\iwdg.c)(0x57984882)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\iwdg.o --omf_browse ..\obj\iwdg.crf --depend ..\obj\iwdg.d)
+F (..\HARDWARE\iwdg.c)(0x57A875DD)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\iwdg.o --omf_browse ..\obj\iwdg.crf --depend ..\obj\iwdg.d)
 I (..\HARDWARE\iwdg.h)(0x579613AE)
 I (..\SYSTEM\sys\sys.h)(0x57961386)
 I (..\USER\stm32f4xx.h)(0x578DCB46)
@@ -816,7 +818,7 @@ I (..\FWLTB\inc\stm32f4xx_dac.h)(0x53DBAFAE)
 I (..\FWLTB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLTB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\SYSTEM\delay\delay.h)(0x57961354)
-F (..\HARDWARE\init.c)(0x57A32F7F)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\init.o --omf_browse ..\obj\init.crf --depend ..\obj\init.d)
+F (..\HARDWARE\init.c)(0x57AC59B2)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\init.o --omf_browse ..\obj\init.crf --depend ..\obj\init.d)
 I (..\SYSTEM\sys\sys.h)(0x57961386)
 I (..\USER\stm32f4xx.h)(0x578DCB46)
 I (..\CORE\core_cm4.h)(0x53C7D532)
@@ -863,7 +865,8 @@ I (..\HARDWARE\iwdg.h)(0x579613AE)
 I (..\HARDWARE\infrared_adc.h)(0x57A340C6)
 I (..\HARDWARE\init.h)(0x579702BC)
 I (..\HARDWARE\pwm.h)(0x579863DC)
-F (..\HARDWARE\move.c)(0x57A3498C)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\move.o --omf_browse ..\obj\move.crf --depend ..\obj\move.d)
+I (..\HARDWARE\rfid.h)(0x57AC2187)
+F (..\HARDWARE\move.c)(0x57AC5AAE)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\move.o --omf_browse ..\obj\move.crf --depend ..\obj\move.d)
 I (..\HARDWARE\DC_Drive_Wheels.h)(0x579DE435)
 I (..\SYSTEM\sys\sys.h)(0x57961386)
 I (..\USER\stm32f4xx.h)(0x578DCB46)
@@ -903,3 +906,44 @@ I (..\FWLTB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\HARDWARE\infrared_adc.h)(0x57A340C6)
 I (..\SYSTEM\delay\delay.h)(0x57961354)
 I (..\HARDWARE\move.h)(0x579DE660)
+F (..\HARDWARE\rfid.c)(0x57AC5555)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\FWLTB\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE-I G:\STM32_Work\USER\RTE-I D:\program\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include-I D:\program\Keil\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F40_41xxx -DSTM32F40_41xxx-o ..\obj\rfid.o --omf_browse ..\obj\rfid.crf --depend ..\obj\rfid.d)
+I (..\HARDWARE\rfid.h)(0x57AC2187)
+I (..\SYSTEM\sys\sys.h)(0x57961386)
+I (..\USER\stm32f4xx.h)(0x578DCB46)
+I (..\CORE\core_cm4.h)(0x53C7D532)
+I (D:\program\Keil\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\CORE\core_cmInstr.h)(0x53C7D532)
+I (..\CORE\core_cmFunc.h)(0x53C7D532)
+I (..\CORE\core_cm4_simd.h)(0x53C7D532)
+I (..\USER\system_stm32f4xx.h)(0x53DBA49A)
+I (..\USER\stm32f4xx_conf.h)(0x53DBB3CC)
+I (..\FWLTB\inc\stm32f4xx_adc.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_crc.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_dma.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_exti.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_flash.h)(0x53DF9332)
+I (..\FWLTB\inc\stm32f4xx_gpio.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_i2c.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_iwdg.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_pwr.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_rcc.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_rtc.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_sdio.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_spi.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_syscfg.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_tim.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_usart.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_wwdg.h)(0x53DBAFAE)
+I (..\FWLTB\inc\misc.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_cryp.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_hash.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_rng.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_can.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_dac.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
+I (..\FWLTB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
+I (..\SYSTEM\usart\usart.h)(0x57961344)
+I (D:\program\Keil\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (..\SYSTEM\delay\delay.h)(0x57961354)
+I (..\HARDWARE\beep.h)(0x57943306)

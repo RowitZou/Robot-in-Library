@@ -46,3 +46,4 @@
 ..\obj\init.o: ..\HARDWARE\infrared_adc.h
 ..\obj\init.o: ..\HARDWARE\init.h
 ..\obj\init.o: ..\HARDWARE\pwm.h
+..\obj\init.o: ..\HARDWARE\rfid.h

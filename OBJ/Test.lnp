@@ -24,6 +24,7 @@
 "..\obj\infrared_adc.o"
 "..\obj\init.o"
 "..\obj\move.o"
+"..\obj\rfid.o"
 --strict --scatter "..\OBJ\Test.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

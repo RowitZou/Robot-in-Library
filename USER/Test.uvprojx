@@ -553,6 +553,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\move.c</FilePath>
             </File>
+            <File>
+              <FileName>rfid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\rfid.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

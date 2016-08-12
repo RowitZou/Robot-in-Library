@@ -46,3 +46,5 @@
 ..\obj\main.o: ..\HARDWARE\infrared_adc.h
 ..\obj\main.o: ..\HARDWARE\init.h
 ..\obj\main.o: ..\HARDWARE\move.h
+..\obj\main.o: ..\HARDWARE\rfid.h
+..\obj\main.o: D:\program\Keil\ARM\ARMCC\Bin\..\include\string.h

@@ -28,9 +28,11 @@ void move(void){
 		  case	FRONT: {
 		  lo= Test_LineOut(_L_O);
 		  ro= Test_LineOut(_R_O);
-		  if(lo)                     {state=LEFT; B_Straight(); delay_ms(400);L_Straight(); delay_ms(500);break;}
-		  else if(ro)                {state=RIGHT;B_Straight(); delay_ms(400);R_Straight();  delay_ms(500);break;}
-		  TIM_SetCompare1(TIM4,1000);
+			  
+		//转向控制，待优化
+		  if(lo)                     {state=LEFT; B_Straight(); delay_ms(350);L_Straight(); delay_ms(500);break;}
+		  else if(ro)                {state=RIGHT;B_Straight(); delay_ms(350);R_Straight();  delay_ms(500);break;}
+		  TIM_SetCompare1(TIM4,1000);         //PWM脉冲占空比调节
 	      TIM_SetCompare2(TIM4,1000);
 		  TIM_SetCompare3(TIM4,800);
 	      TIM_SetCompare4(TIM4,800);
@@ -48,8 +50,8 @@ void move(void){
 		 case BACK: {
 		  lo= Test_LineOut(_L_O);
 		  ro= Test_LineOut(_R_O);
-		  if(ro)                     {state=RIGHT;F_Straight(); delay_ms(400); R_Straight(); delay_ms(500);break;}
-		  else if(lo)                {state=LEFT; F_Straight(); delay_ms(400);L_Straight(); delay_ms(500);break;}
+		  if(ro)                     {state=RIGHT;F_Straight(); delay_ms(350); R_Straight(); delay_ms(500);break;}
+		  else if(lo)                {state=LEFT; F_Straight(); delay_ms(350);L_Straight(); delay_ms(500);break;}
 		  TIM_SetCompare1(TIM4,1000);
 	      TIM_SetCompare2(TIM4,1000);
 		  TIM_SetCompare3(TIM4,800);
@@ -68,8 +70,8 @@ void move(void){
 		 case LEFT:{
 		  fo= Test_LineOut(_F_O);
 		  bo= Test_LineOut(_B_O);
-		  if(bo)                     {state=BACK; R_Straight(); delay_ms(400);B_Straight(); delay_ms(500);break;}
-		  else if(fo)                {state=FRONT;R_Straight(); delay_ms(400);F_Straight(); delay_ms(500);ALL_Stop();return;}
+		  if(bo)                     {state=BACK; R_Straight(); delay_ms(350);B_Straight(); delay_ms(500);break;}
+		  else if(fo)                {state=FRONT;R_Straight(); delay_ms(350);F_Straight(); delay_ms(500);ALL_Stop();return;}
 		  TIM_SetCompare1(TIM4,800);
 	      TIM_SetCompare2(TIM4,800);
 		  TIM_SetCompare3(TIM4,1000);
@@ -88,8 +90,8 @@ void move(void){
 		 case RIGHT: {
 		  fo= Test_LineOut(_F_O);
 		  bo= Test_LineOut(_B_O);
-		  if(fo)                     {state=FRONT; L_Straight(); delay_ms(400);F_Straight(); delay_ms(500);break;}
-		  else if(bo)                {state=BACK;  L_Straight(); delay_ms(400);B_Straight(); delay_ms(500);break;}
+		  if(fo)                     {state=FRONT; L_Straight(); delay_ms(350);F_Straight(); delay_ms(500);break;}
+		  else if(bo)                {state=BACK;  L_Straight(); delay_ms(350);B_Straight(); delay_ms(500);break;}
 		  TIM_SetCompare1(TIM4,800);
 	      TIM_SetCompare2(TIM4,800);
 		  TIM_SetCompare3(TIM4,1000);
@@ -105,16 +107,6 @@ void move(void){
 		  break;
 		 }
 	 }
-	
-	
-	
-	
-	
 	}
-
-
-
-
-
 
 }

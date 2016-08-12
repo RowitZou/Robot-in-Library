@@ -9,6 +9,7 @@
 #include "infrared_adc.h"
 #include "init.h"
 #include "pwm.h"
+#include "rfid.h"
 
 void System_Init(void){
 
@@ -22,4 +23,5 @@ void System_Init(void){
 	//Ultrasonic_Init();
 	Infrared_Adc_Init();
     TIM4_PWM_Init(1000-1,84-1);
+	rfid_init();
 }

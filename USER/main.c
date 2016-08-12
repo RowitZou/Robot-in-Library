@@ -9,13 +9,16 @@
 #include "infrared_adc.h"
 #include "init.h"
 #include "move.h"
+#include "rfid.h" 
+#include <string.h>
 
 int main(void)
 { 
+	
 	//float temp;
 	System_Init();
 	//Ultrasonic_Work();
-	move();
+	//move();
 /*	while(1){
 	 
 		Turn_Left();
@@ -27,12 +30,17 @@ int main(void)
 	
 	}*/
 	  
+	read_books();
+	move();
 	while(1){
 		
     GPIO_ResetBits(GPIOF,GPIO_Pin_9); 
 	  delay_ms(100);
 	GPIO_SetBits(GPIOF,GPIO_Pin_9);
 	  delay_ms(100);
+		
+	
+	
 	 /* TIM_SetCompare1(TIM4,1999);
 	  TIM_SetCompare2(TIM4,0);
 	  TIM_SetCompare3(TIM4,1000);
@@ -50,8 +58,8 @@ int main(void)
 	/*	else{
 		  GPIO_ResetBits(GPIOF,GPIO_Pin_9 | GPIO_Pin_10);
 		}*/
-		
 	}
+	
 }
 
 
