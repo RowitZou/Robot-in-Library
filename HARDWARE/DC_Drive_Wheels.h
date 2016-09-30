@@ -15,5 +15,7 @@ void L_Turn_Left(void);
 void L_Turn_Right(void);
 void R_Turn_Left(void);
 void R_Turn_Right(void);
+void Shelf_Turn_Right(void);
+void Shelf_Turn_Left(void);
 void ALL_Stop(void);
 #endif

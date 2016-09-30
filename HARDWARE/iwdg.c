@@ -1,6 +1,6 @@
 #include "iwdg.h"
 
-//TIM10
+//TIM13
 void IWDG_Init(void)
 {   
 	u16 arr = 5000-1;
@@ -11,19 +11,19 @@ void IWDG_Init(void)
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM10,ENABLE);  ///使能TIM10时钟
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM13,ENABLE);  ///使能TIM13时钟
 	
     TIM_TimeBaseInitStructure.TIM_Period = arr; 	//自动重装载值
 	TIM_TimeBaseInitStructure.TIM_Prescaler=psc;  //定时器分频
 	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //向上计数模式
 	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1; 
 	
-	TIM_TimeBaseInit(TIM10,&TIM_TimeBaseInitStructure);//初始化TIM10
+	TIM_TimeBaseInit(TIM13,&TIM_TimeBaseInitStructure);//初始化TIM13
 	
-	TIM_ITConfig(TIM10,TIM_IT_Update,ENABLE); //允许定时器10更新中断
-	TIM_Cmd(TIM10,ENABLE); //使能定时器10
+	TIM_ITConfig(TIM13,TIM_IT_Update,ENABLE); //允许定时器13更新中断
+	TIM_Cmd(TIM13,ENABLE); //使能定时器13
 	
-	NVIC_InitStructure.NVIC_IRQChannel=TIM1_UP_TIM10_IRQn; //定时器10中断
+	NVIC_InitStructure.NVIC_IRQChannel= TIM8_UP_TIM13_IRQn; //定时器13中断
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0x00; //抢占优先级0
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0x00; //子优先级0
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;
@@ -41,11 +41,11 @@ void IWDG_Init(void)
 }
 
 
-void TIM1_UP_TIM10_IRQHandler(void)
+void  TIM8_UP_TIM13_IRQHandler(void)
 {
-	if(TIM_GetITStatus(TIM10,TIM_IT_Update)==SET) //溢出中断
+	if(TIM_GetITStatus(TIM13,TIM_IT_Update)==SET) //溢出中断
 	{
 		IWDG_ReloadCounter();//reload
 	}
-	TIM_ClearITPendingBit(TIM10,TIM_IT_Update);  //清除中断标志位
+	TIM_ClearITPendingBit(TIM13,TIM_IT_Update);  //清除中断标志位
 }

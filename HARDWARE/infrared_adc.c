@@ -1,6 +1,6 @@
 #include "infrared_adc.h"
 #include "delay.h"		
-#define TEST_VOLT 2  //检测电压
+#define TEST_VOLT 2.0 //检测电压
 
 //初始化ADC															   
 void  Infrared_Adc_Init(void)
@@ -89,7 +89,7 @@ u16 Get_Adc(u8 ch)
 }
 
 //返回值:通道ch的times次转换结果平均值
-float Infrared_ScanIn(u8 ch)
+double Infrared_ScanIn(u8 ch)
 {
 	u32 temp_val=0;
 	u8 times=3;  //5次取平均
@@ -99,10 +99,10 @@ float Infrared_ScanIn(u8 ch)
 		temp_val+=Get_Adc(ch);
 		delay_ms(1);
 	}
-	return (float)((temp_val/times)*(3.3/4096));
+	return (double)((temp_val/times)*(3.3/4096));
 } 
 
-float Infrared_ScanOut(u8 ch)
+double Infrared_ScanOut(u8 ch)
 {
 	u32 temp_val=0;
 	u8 times=5;  //5次取平均
@@ -112,7 +112,7 @@ float Infrared_ScanOut(u8 ch)
 		temp_val+=Get_Adc(ch);
 		delay_us(500);
 	}
-	return (float)((temp_val/times)*(3.3/4096));
+	return (double)((temp_val/times)*(3.3/4096));
 } 
 
 int Test_LineIn(u8 ch){

@@ -47,4 +47,8 @@
 ..\obj\main.o: ..\HARDWARE\init.h
 ..\obj\main.o: ..\HARDWARE\move.h
 ..\obj\main.o: ..\HARDWARE\rfid.h
-..\obj\main.o: D:\program\Keil\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: ..\HARDWARE\Ste_Engine.h
+..\obj\main.o: ..\HARDWARE\line_set.h
+..\obj\main.o: ..\HARDWARE\Step_Motor.h
+..\obj\main.o: ..\HARDWARE\crawler_belt.h
+..\obj\main.o: ..\HARDWARE\up_shelf.h

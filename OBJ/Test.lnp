@@ -25,6 +25,11 @@
 "..\obj\init.o"
 "..\obj\move.o"
 "..\obj\rfid.o"
+"..\obj\ste_engine.o"
+"..\obj\step_motor.o"
+"..\obj\line_set.o"
+"..\obj\up_shelf.o"
+"..\obj\crawler_belt.o"
 --strict --scatter "..\OBJ\Test.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

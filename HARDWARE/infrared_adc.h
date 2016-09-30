@@ -12,8 +12,8 @@
 
 void Infrared_Adc_Init(void); 				
 u16  Get_Adc(u8 ch); 				
-float  Infrared_ScanIn(u8 ch);
-float  Infrared_ScanOut(u8 ch);
+double  Infrared_ScanIn(u8 ch);
+double  Infrared_ScanOut(u8 ch);
 int   Test_LineIn(u8 ch);
 int   Test_LineOut(u8 ch);
 #endif 

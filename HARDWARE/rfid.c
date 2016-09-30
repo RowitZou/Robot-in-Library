@@ -3,13 +3,21 @@
 #include "usart.h"
 #include "delay.h"
 #include "beep.h"
+#include "DC_Drive_Wheels.h"
 
 //UART4 PC10 TX , PC11 RX, PC12 TX, PD2 RX
 //PA13 14 15 UART4; PD3 4 5 UART5
 u8  UART4_RX_BUF[UART4_LEN];
+u8  UART5_RX_BUF[UART5_LEN];
 u8  BOOK[5][13]={0};
+u8  SHELF[10]={0};
 u16 UART4_RX_STA=0;
+u16 UART5_RX_STA=0;
 int UART4_RX_SUCCESS = 0;
+int UART5_RX_SUCCESS = 0;
+u8 SHELF_CHECK = 0;
+u8 SHELF_CHECK_1 = 0;
+u8 SHELF_CHECK_2 = 0;
 
 void rfid_init(void){
 
@@ -61,11 +69,15 @@ void rfid_init(void){
 	USART_Cmd(UART5, ENABLE); 
 	
 	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);  //串口4接收中断
+	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);  //串口5接收中断
 
     NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority =1;		
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;		
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;	
+    NVIC_Init(&NVIC_InitStructure);
+	
+    NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;
 	NVIC_Init(&NVIC_InitStructure);
 	
 }
@@ -101,7 +113,7 @@ void UART4_TX(u8 command1,u8 command2,u8 *UID){
 		}
 	}
 	if(command1==0x05&&command2==0x10){
-		u8 UART4_TX_BUF[UART4_LEN]={0xaa,0xbb,16,0,0,0,0x05,0x10,0,0,0,0,0,0,0,0,0,0,3}; //读卡的前三个字节数据
+		u8 UART4_TX_BUF[UART4_LEN]={0xaa,0xbb,16,0,0,0,0x05,0x10,0,0,0,0,0,0,0,0,0,0,1}; //读卡的前三个字节数据
 		for(i=8;i<=16;i++){
 			UART4_TX_BUF[i]=*UID;
 			UID++;
@@ -125,18 +137,82 @@ void UART4_TX(u8 command1,u8 command2,u8 *UID){
 	}
 }
 
+void UART5_TX(u8 command1,u8 command2,u8 *UID){
+	int i;
+    if(command1==0x08&&command2==0x01){
+		u8 UART5_TX_BUF[UART5_LEN]={0xaa,0xbb,6,0,0,0,0x08,0x01,49}; //ISO15693模式
+		UART5_TX_BUF[9]=UART5_TX_BUF[4];
+		for(i=5;i<=8;i++)  UART5_TX_BUF[9]^=UART5_TX_BUF[i];
+		for(i=0;i<=9;i++){
+		  USART_SendData(UART5,UART5_TX_BUF[i]);
+	     while((UART5->SR&0X40)==0);
+		}
+	}
+	
+	if(command1==0x07&&command2==0x01){
+		u8 UART5_TX_BUF[UART5_LEN]={0xaa,0xbb,6,0,0,0,0x07,0x01,0x03}; //两灯模式
+		UART5_TX_BUF[9]=UART5_TX_BUF[4];
+		for(i=5;i<=8;i++)  UART5_TX_BUF[9]^=UART5_TX_BUF[i];
+		for(i=0;i<=9;i++){
+		  USART_SendData(UART5,UART5_TX_BUF[i]);
+	     while((UART5->SR&0X40)==0);
+		}
+	}
+	if(command1==0x01&&command2==0x10){
+		u8 UART5_TX_BUF[UART5_LEN]={0xaa,0xbb,5,0,0,0,0x01,0x10}; //单卡模式
+		UART5_TX_BUF[8]=UART5_TX_BUF[4];
+		for(i=5;i<=7;i++)  UART5_TX_BUF[8]^=UART5_TX_BUF[i];
+		for(i=0;i<=8;i++){
+		  USART_SendData(UART5,UART5_TX_BUF[i]);
+	     while((UART5->SR&0X40)==0);
+		}
+	}
+	if(command1==0x05&&command2==0x10){
+		u8 UART5_TX_BUF[UART5_LEN]={0xaa,0xbb,16,0,0,0,0x05,0x10,0,0,0,0,0,0,0,0,0,0,1}; //读卡的前三个字节数据
+		for(i=8;i<=16;i++){
+			UART5_TX_BUF[i]=*UID;
+			UID++;
+		}
+		UART5_TX_BUF[19]=UART5_TX_BUF[4];
+		for(i=5;i<=18;i++)  {
+		    if(UART5_TX_BUF[i]==0xaa)
+				UART5_TX_BUF[19]^=0x00;
+			UART5_TX_BUF[19]^=UART5_TX_BUF[i];
+		}
+		for(i=0;i<=19;i++){
+		//  printf("%x ",UART4_TX_BUF[i]);
+		  USART_SendData(UART5,UART5_TX_BUF[i]);
+		  while((UART5->SR&0X40)==0);
+		  if(i>=2&&UART5_TX_BUF[i]==0xaa){
+			   USART_SendData(UART5,0x00);
+			   while((UART5->SR&0X40)==0);
+		  }
+		}
+		//printf("\r\n");
+	}
+}
+
 void read_books(void){
 
 	int num=0,i,j;
-  GPIO_SetBits(GPIOD,GPIO_Pin_3);
+  GPIO_SetBits(GPIOD,GPIO_Pin_3);              //PD3使能
   delay_ms(100);
   while(!UART4_RX_SUCCESS){                    //启动读卡器的ISO15693模式
 	  UART4_TX(0x08,0x01,NULL);
 		delay_ms(50);
 	}
+  
+  GPIO_SetBits(GPIOD,GPIO_Pin_4);               //PD4使能
+  delay_ms(100);
+  while(!UART5_RX_SUCCESS){                    //启动读卡器的ISO15693模式
+	  UART5_TX(0x08,0x01,NULL);
+		delay_ms(50);
+	}
+
+  UART5_RX_SUCCESS = 0;
   UART4_RX_SUCCESS = 0;
 	
-  while(num<3){              //一共5本书
+  while(num<5){              //一共5本书
 	  
 	while(!UART4_RX_SUCCESS){
 	  UART4_TX(0x01,0x10,NULL);
@@ -164,17 +240,74 @@ void read_books(void){
 	}
 	 UART4_RX_SUCCESS = 0;
 	
+	 BOOK[num][9]=UART4_RX_BUF[7];
+	 BOOK[num][10]=UART4_RX_BUF[8];
+	 BOOK[num][11]=UART4_RX_BUF[9];
+	
 	GPIO_SetBits(GPIOF,GPIO_Pin_8);
 	delay_ms(30);
 	GPIO_ResetBits(GPIOF,GPIO_Pin_8);
 	num++;
-   /* for(i=0;i<(UART4_RX_STA&0x3fff);i++)
+    /*for(i=0;i<(UART4_RX_STA&0x3fff);i++)
     	 printf("%x ",UART4_RX_BUF[i]);
 	  printf("\r\n");*/
    }
   }
   
   GPIO_ResetBits(GPIOD,GPIO_Pin_3);
+}
+
+void read_shelves(void){
+
+	int i;
+  
+  if(UART5_RX_SUCCESS&&!SHELF_CHECK){           
+	  
+	//ALL_Stop();
+	UART5_RX_SUCCESS = 0;
+	
+	//确定书架
+	for(i=0;i<9;i++){
+	   SHELF[i]=UART5_RX_BUF[i+7];
+	}
+	while(!UART5_RX_SUCCESS){
+	  UART5_TX(0x05,0x10,SHELF);
+	  delay_ms(50);
+	}
+	 UART5_RX_SUCCESS = 0;
+	 SHELF[9]=UART5_RX_BUF[7];
+	 for(i=0;i<5;i++){
+	     if(SHELF[9]==BOOK[i][12]){
+			if(!SHELF_CHECK){
+		      SHELF_CHECK=(u8)(i+1);
+              SHELF_CHECK<<=4;	
+              SHELF_CHECK+=(u8)BOOK[i][10];			 
+			}	 
+			else if (!SHELF_CHECK_1){
+			  SHELF_CHECK_1=(u8)(i+1);
+              SHELF_CHECK_1<<=4;	
+              SHELF_CHECK_1+=(u8)BOOK[i][10];			
+			}
+			else{
+			  SHELF_CHECK_2=(u8)(i+1);
+              SHELF_CHECK_2<<=4;	
+              SHELF_CHECK_2+=(u8)BOOK[i][10];			
+			}
+		}
+	 }
+	 if(!SHELF_CHECK)
+		 SHELF_CHECK = 0xff;
+	// SHELF_CHECK=1;
+	return ;
+   /* for(i=0;i<(UART4_RX_STA&0x3fff);i++)
+    	 printf("%x ",UART4_RX_BUF[i]);
+	  printf("\r\n");*/
+   }
+  
+  else{
+	  UART5_TX(0x01,0x10,NULL);
+	  delay_ms(10);
+	}
 }
 
 void UART4_IRQHandler(void){
@@ -214,6 +347,49 @@ void UART4_IRQHandler(void){
 				    }
 					if(UART4_RX_BUF[1]==UART4_RX_BUF[(UART4_RX_STA&0x3fff)-1])  //校验字检验
 						UART4_RX_SUCCESS = 1;
+				}   
+			}		
+		}
+  } 
+}
+
+void UART5_IRQHandler(void){
+
+	u8 Res;
+    int i;
+	if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)  
+	{
+		Res =USART_ReceiveData(UART5);
+		
+		if(Res == 0xaa) {
+			UART5_RX_STA|=0x4000;                //标志接收到0xaa
+			if(UART5_RX_STA&0x8000) {            //如果已经处于命令接收状态，记录0xaa
+				UART5_RX_BUF[UART5_RX_STA&0X3FFF]=Res ;
+                UART5_RX_STA++;		
+			}                    				
+		}
+		else if(UART5_RX_STA&0x4000){            //上一个字节是0xaa
+			if(Res == 0xbb){
+		       UART5_RX_STA=0x8000;
+			}
+			else {
+			   UART5_RX_STA&=0xbfff;
+			}
+		}
+		
+		else if(UART5_RX_STA&0x8000){
+			UART5_RX_BUF[UART5_RX_STA&0X3FFF]=Res ;
+            UART5_RX_STA++;	
+			
+			//接收完成处理数据
+		    if((UART5_RX_BUF[0]+0x0002)<=(UART5_RX_STA&0x3fff)){
+			    if((UART5_RX_STA&0x3fff)>=8&&UART5_RX_BUF[6]==0x00){            //状态字为成功
+					UART5_RX_BUF[1]=UART5_RX_BUF[2];
+				    for(i=3;i<=UART5_RX_BUF[0];i++){
+						UART5_RX_BUF[1]^=UART5_RX_BUF[i];
+				    }
+					if(UART5_RX_BUF[1]==UART5_RX_BUF[(UART5_RX_STA&0x3fff)-1])  //校验字检验
+						UART5_RX_SUCCESS = 1;
 				}   
 			}		
 		}

@@ -1,13 +1,15 @@
  /*
      This function is measuring the distance.
 	 
-	 Use PE1,PE3,PE5,PC13,PB3,PB5,PB7,PB9,TIM9,TIM3
+	 Use PE1,PE3,PE5,PC13,PB3,PB5,PB7,PB9,TIM9,TIM3 
+	 TIM9 LEFT ; TIM3 RIGHT
  */
  #include "sys.h"
  #include "delay.h"
  #include "usart.h"
  #include "Ultrasonic_Distance.h"
  #include "DC_Drive_Wheels.h"
+ #define  DISTANCE 700
  
  TIM_ICInitTypeDef  TIM9_ICInitStructure;
  TIM_ICInitTypeDef  TIM3_ICInitStructure;
@@ -16,7 +18,7 @@
     
   u16 arr=0XFFFF;  
   u16 psc=84-1;   
-  u16 psc1=168-1;	 
+  u16 psc1=168-1; 
   GPIO_InitTypeDef  GPIO_InitStructure;
   TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
@@ -130,6 +132,11 @@ u16	TIM3CH2_CAPTURE_VAL;
 	 
 	long long temp1 = 0;
 	long long temp2 = 0;
+	int parallel_state = 10;
+	TIM_SetCompare1(TIM4,800);
+	TIM_SetCompare2(TIM4,800);
+    TIM_SetCompare3(TIM4,800);
+	TIM_SetCompare4(TIM4,800);
      while(1){
       GPIO_SetBits(GPIOE,GPIO_Pin_3); 
 	  GPIO_SetBits(GPIOB,GPIO_Pin_7);
@@ -142,20 +149,25 @@ u16	TIM3CH2_CAPTURE_VAL;
 			temp1*=0XFFFF;		 		         //溢出时间总和
 			temp1+=TIM9CH1_CAPTURE_VAL;		
            // temp1=temp1/2;			//得到总的高电平时间
-			if(temp1-temp2<=6&&temp2-temp1<=6) {
-				
+			/*if(parallel_state){
+			  if(temp1<=DISTANCE||temp2<=DISTANCE){
+			     ALL_Stop();
+				 return ;
+			  }
+			  else  F_Straight();
+			}
+			else if(temp1-temp2<=6&&temp2-temp1<=6) {
+			  parallel_state = 1;
 			  ALL_Stop();
-			  return;
+			  delay_ms(100);
 			}
 			else if(temp1<temp2){
-			  printf("LLL\r\n");
-	          //Turn_Left();		
+	          Shelf_Turn_Left();		
 			}
 			else  {
-			  printf("RRR\r\n");
-			 // Turn_Right();
-			}
-			printf("ADISTANCE:%.3lf m\r\n",(temp1*0.00034)/2.0); //打印总的高点平时间
+			  Shelf_Turn_Right();
+			}*/
+			//printf("ADISTANCE:%.3lf m\r\n",(temp1*0.00034)/2.0); //打印总的高点平时间
 			TIM9CH1_CAPTURE_STA=0;			    //开启下一次捕获
 		}
 		if(TIM3CH2_CAPTURE_STA&0X80)        //成功捕获到了一次高电平
@@ -163,24 +175,39 @@ u16	TIM3CH2_CAPTURE_VAL;
 			temp2=TIM3CH2_CAPTURE_STA&0X3F; 
 			temp2*=0XFFFF;		 		         //溢出时间总和
 			temp2+=TIM3CH2_CAPTURE_VAL;		   //得到总的高电平时间
-		    if(temp1-temp2<=6&&temp2-temp1<=6) {
+		    if(!parallel_state){
+			  if(temp1<=DISTANCE||temp2<=DISTANCE){
+			     ALL_Stop();
+				 return ;
+			  }
+			  else  F_Straight();
+			}
+			else if(parallel_state>1){
+			  parallel_state--;
+			}
+			else if(temp1-temp2<=6&&temp2-temp1<=6) {
+			  parallel_state = 0;
 			  ALL_Stop();
-			 // return;
+			  delay_ms(10);
 			}
 			else if(temp1<temp2){
-	         // Turn_Left();		
+	          Shelf_Turn_Left();		
 			}
 			else  {
-			 // Turn_Right();
+			  Shelf_Turn_Right();
 			}
-			printf("                          BDISTANCE:%.3lf m\r\n",(temp2*0.00034)/2.0); //打印总的高点平时间
+			//printf("                          BDISTANCE:%.3lf m\r\n",(temp2*0.00034)/2.0); //打印总的高点平时间
 			TIM3CH2_CAPTURE_STA=0;			     //开启下一次捕获
 		}
 		   delay_ms(20); 
 	}
  }
  
+ /*
  
+   TIM1_BRK_TIM9 和 TIM3中断输入捕获
+ 
+ */
 void  TIM1_BRK_TIM9_IRQHandler (void)
 { 		    
 

@@ -39,3 +39,6 @@
 ..\obj\move.o: ..\HARDWARE\infrared_adc.h
 ..\obj\move.o: ..\SYSTEM\delay\delay.h
 ..\obj\move.o: ..\HARDWARE\move.h
+..\obj\move.o: ..\HARDWARE\rfid.h
+..\obj\move.o: ..\HARDWARE\up_shelf.h
+..\obj\move.o: ..\HARDWARE\Ultrasonic_Distance.h

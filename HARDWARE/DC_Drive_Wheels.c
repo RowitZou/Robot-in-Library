@@ -100,3 +100,15 @@ void ALL_Stop(void){
  GPIO_SetBits(GPIOF,GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
 
 }
+
+void Shelf_Turn_Left(void){
+   GPIO_SetBits(GPIOF,GPIO_Pin_3| GPIO_Pin_0);
+   GPIO_ResetBits(GPIOF,GPIO_Pin_2 | GPIO_Pin_1);
+   GPIO_SetBits(GPIOF,GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
+}
+
+void Shelf_Turn_Right(void){
+   GPIO_SetBits(GPIOF,GPIO_Pin_2 |GPIO_Pin_1);
+   GPIO_ResetBits(GPIOF,GPIO_Pin_3|GPIO_Pin_0);
+   GPIO_SetBits(GPIOF, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7);
+}

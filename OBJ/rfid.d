@@ -40,3 +40,4 @@
 ..\obj\rfid.o: D:\program\Keil\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\rfid.o: ..\SYSTEM\delay\delay.h
 ..\obj\rfid.o: ..\HARDWARE\beep.h
+..\obj\rfid.o: ..\HARDWARE\DC_Drive_Wheels.h

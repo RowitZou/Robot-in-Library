@@ -10,6 +10,9 @@
 #include "init.h"
 #include "pwm.h"
 #include "rfid.h"
+#include "Ste_Engine.h"
+#include "Step_Motor.h"
+#include "crawler_belt.h"
 
 void System_Init(void){
 
@@ -18,10 +21,13 @@ void System_Init(void){
 	IWDG_Init();
 	LED_Init();
 	BEEP_Init();
-	//uart_init(115200);
+	uart_init(115200);
 	DC_Drive_Wheels_Init();
-	//Ultrasonic_Init();
+	Ultrasonic_Init();
 	Infrared_Adc_Init();
     TIM4_PWM_Init(1000-1,84-1);
+	TIM12_PWM_Init(20000-1,84-1);
 	rfid_init();
+    step_motor_Init();
+	crawler_belt_init();
 }

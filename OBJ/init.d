@@ -47,3 +47,6 @@
 ..\obj\init.o: ..\HARDWARE\init.h
 ..\obj\init.o: ..\HARDWARE\pwm.h
 ..\obj\init.o: ..\HARDWARE\rfid.h
+..\obj\init.o: ..\HARDWARE\Ste_Engine.h
+..\obj\init.o: ..\HARDWARE\Step_Motor.h
+..\obj\init.o: ..\HARDWARE\crawler_belt.h

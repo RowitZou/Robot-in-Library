@@ -558,6 +558,31 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\rfid.c</FilePath>
             </File>
+            <File>
+              <FileName>Ste_Engine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Ste_Engine.c</FilePath>
+            </File>
+            <File>
+              <FileName>Step_Motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Step_Motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>line_set.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\line_set.c</FilePath>
+            </File>
+            <File>
+              <FileName>up_shelf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\up_shelf.c</FilePath>
+            </File>
+            <File>
+              <FileName>crawler_belt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\crawler_belt.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
