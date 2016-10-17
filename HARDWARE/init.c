@@ -18,10 +18,10 @@ void System_Init(void){
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	delay_init(168);
-	IWDG_Init();
+	//IWDG_Init();
 	LED_Init();
 	BEEP_Init();
-	uart_init(115200);
+	//uart_init(115200);
 	DC_Drive_Wheels_Init();
 	Ultrasonic_Init();
 	Infrared_Adc_Init();

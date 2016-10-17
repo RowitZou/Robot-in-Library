@@ -9,7 +9,9 @@
  #include "usart.h"
  #include "Ultrasonic_Distance.h"
  #include "DC_Drive_Wheels.h"
- #define  DISTANCE 700
+ #define  DISTANCE1 710
+ #define  DISTANCE2 740
+ extern int left_state;
  
  TIM_ICInitTypeDef  TIM9_ICInitStructure;
  TIM_ICInitTypeDef  TIM3_ICInitStructure;
@@ -176,11 +178,20 @@ u16	TIM3CH2_CAPTURE_VAL;
 			temp2*=0XFFFF;		 		         //溢出时间总和
 			temp2+=TIM3CH2_CAPTURE_VAL;		   //得到总的高电平时间
 		    if(!parallel_state){
-			  if(temp1<=DISTANCE||temp2<=DISTANCE){
-			     ALL_Stop();
-				 return ;
-			  }
-			  else  F_Straight();
+			  if(!left_state){
+			     if(temp1<=DISTANCE1||temp2<=DISTANCE1){
+			          ALL_Stop();
+				      return ;
+			     }
+			     else  F_Straight();
+		      }
+			  else{
+			     if(temp1<=DISTANCE2||temp2<=DISTANCE2){
+			          ALL_Stop();
+				      return ;
+			     }
+			     else  F_Straight();
+		      }
 			}
 			else if(parallel_state>1){
 			  parallel_state--;

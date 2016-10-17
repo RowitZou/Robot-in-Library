@@ -201,7 +201,6 @@ void read_books(void){
 	  UART4_TX(0x08,0x01,NULL);
 		delay_ms(50);
 	}
-  
   GPIO_SetBits(GPIOD,GPIO_Pin_4);               //PD4使能
   delay_ms(100);
   while(!UART5_RX_SUCCESS){                    //启动读卡器的ISO15693模式
@@ -211,7 +210,7 @@ void read_books(void){
 
   UART5_RX_SUCCESS = 0;
   UART4_RX_SUCCESS = 0;
-	
+
   while(num<5){              //一共5本书
 	  
 	while(!UART4_RX_SUCCESS){
@@ -219,7 +218,6 @@ void read_books(void){
 	  delay_ms(50);
 	}
 	 UART4_RX_SUCCESS = 0;
-	
 	//确保同一本书不会多次扫描
 	for(i=0;i<num;i++){
 	   for(j=0;j<9;j++){
@@ -245,7 +243,7 @@ void read_books(void){
 	 BOOK[num][11]=UART4_RX_BUF[9];
 	
 	GPIO_SetBits(GPIOF,GPIO_Pin_8);
-	delay_ms(30);
+	delay_ms(200);
 	GPIO_ResetBits(GPIOF,GPIO_Pin_8);
 	num++;
     /*for(i=0;i<(UART4_RX_STA&0x3fff);i++)
